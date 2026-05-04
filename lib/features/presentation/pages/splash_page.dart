@@ -38,26 +38,45 @@ class _SplashPageState extends State<SplashPage> {
             Icon(
               Icons.shopify_rounded,
               color: Colors.amber,
-              size: 40,
+              size: 150,
             ),
 
             const SizedBox(height: 10),
 
-            //text
+            //Judul
             Text(
-              'Syifa Sopian Nurdiansyah\nNIM : 20123049',
-              textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 20),
+              'UTD STORE - Syifa',
+              style: TextStyle(
+                fontSize: 35,
+                fontWeight: FontWeight.bold
+              ),
             ),
 
-            const SizedBox(height: 20),
+            const SizedBox(height: 10),
+
+            //Nama
+            Text(
+              'Syifa Sopian Nurdiansyah',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold
+              ),
+            ),
+
+            //NIM-ku
+            Text(
+              'NIM : 20123049',
+              style: TextStyle(fontSize: 16),
+            ),
+
+            const SizedBox(height: 60),
 
             //loading
             CircularProgressIndicator(
               strokeWidth: 3,
             ),
 
-            const SizedBox(height: 5),
+            const SizedBox(height: 10),
 
             Text(
               'Now Loading...',
