@@ -39,6 +39,10 @@ dependencies:
   dio: ^5.9.2
   flutter_bloc: ^9.1.1
   equatable: ^2.0.8
+  logger: ^2.7.0
+  isar: ^3.1.0+1
+  isar_flutter_libs: ^3.1.0+1
+  path_provider: ^2.1.5
 
 dev_dependencies:
   flutter_test:

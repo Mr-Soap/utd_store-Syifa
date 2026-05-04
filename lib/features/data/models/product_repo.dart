@@ -8,6 +8,7 @@ class ProductRepo {
   Future<List<ProductModel>> getProducts() async {
     final response = await apiService.getProducts();
     final List data = response.data;
+
     const int lastNimDigit = 9;
 
     return data.map((json) {
@@ -18,7 +19,22 @@ class ProductRepo {
       } else {
         title += " [Promo Ongkir]";
       }
-      return ProductModel(title: title);
+      return ProductModel(
+        id: json['id'],
+        title: title,
+        price: (json['price'] as num).toDouble(),
+        image: json["image"],
+        category: json["category"]
+        );
     }).toList();
+  }
+
+  Future<ProductModel?> getProductById(String id) async{
+    try {
+      final response = await apiService.dio.get('/products/$id');
+      return ProductModel.fromJson(response.data);
+    } catch (e) {
+      return null;
+    }
   }
 }

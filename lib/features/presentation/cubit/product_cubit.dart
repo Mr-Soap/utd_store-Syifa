@@ -21,13 +21,15 @@ class ProductCubit extends Cubit<ProductState>{
   ProductCubit() : super(ProductLoading());
 
   Future<void> fetchProducts() async {
+    emit(ProductLoading());
+    
     try {
-      emit(ProductLoading());
 
       final products = await repository.getProducts();
 
       emit(ProductLoaded(products));
     } catch (e) {
+      print("PRODUCT ERROR: $e");
       emit(ProductError());
     }
   }

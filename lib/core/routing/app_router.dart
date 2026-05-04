@@ -1,4 +1,5 @@
 import 'package:go_router/go_router.dart';
+import 'package:utd_store/features/presentation/pages/detail_page.dart';
 import '../../features/presentation/pages/splash_page.dart';
 import '../../features/presentation/pages/product_page.dart';
 
@@ -14,5 +15,13 @@ final GoRouter appRouter = GoRouter(
       path: '/product',
       builder: (context, state) => const ProductPage(),
     ),
+
+    GoRoute(
+      path: '/detail/:id',
+      builder: (context, state) {
+        final productId = state.pathParameters['id']!;
+        return DetailPage(productId: productId);
+      },
+),
   ],
 );
