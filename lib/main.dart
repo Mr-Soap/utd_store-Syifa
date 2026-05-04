@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:utd_store/features/product/presentation/pages/splash_screen.dart';
+import 'package:utd_store/core/routing/app_router.dart';
 import 'core/theme/app_theme.dart';
 import 'core/di/injector.dart';
-void main() {
+
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await init();
+
   runApp(const MainApp());
 }
 
@@ -11,11 +15,9 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       debugShowCheckedModeBanner: false,
-      title: 'UTD STORE - Syifa',
-      theme: AppTheme.lightTheme,
-      home: const SplashScreen()
+      routerConfig: appRouter,
     );
   }
 }
