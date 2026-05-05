@@ -1,4 +1,5 @@
 import 'package:go_router/go_router.dart';
+import 'package:utd_store/features/data/services/native_page.dart';
 import 'package:utd_store/features/presentation/pages/bookmark_page.dart';
 import 'package:utd_store/features/presentation/pages/crypto_page.dart';
 import 'package:utd_store/features/presentation/pages/detail_page.dart';
@@ -34,6 +35,11 @@ final GoRouter appRouter = GoRouter(
     GoRoute(
       path: '/crypto',
       builder: (context, state) => CryptoPage(),
+    ),
+
+    GoRoute(
+      path: '/native',
+      builder: (context, state) => NativePage(),
     ),
   ],
 );

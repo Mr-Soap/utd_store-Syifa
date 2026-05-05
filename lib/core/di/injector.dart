@@ -4,6 +4,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:utd_store/features/data/models/repositories/bookmark_repo.dart';
 import 'package:utd_store/features/data/models/repositories/product_repo.dart';
 import 'package:utd_store/features/data/services/crypto_service.dart';
+import 'package:utd_store/features/data/services/native_service.dart';
 import '../../features/domain/services/splash_service.dart';
 import '../../features/data/services/api_service.dart';
 import '../../features/data/services/product_service.dart';
@@ -27,5 +28,6 @@ Future<void> init() async {
   sl.registerLazySingleton(() => ProductRepo());
   sl.registerLazySingleton(() => BookmarkRepo());
   sl.registerLazySingleton(() => CryptoService());
+  sl.registerLazySingleton(() => NativeService());
   sl.registerFactory(() => ProductService(sl()));
 }

@@ -16,11 +16,24 @@ class ProductPage extends StatelessWidget {
         appBar: AppBar(
           title: const Text("UTD STORE - Syifa"),
           actions: [
-            IconButton(
-              icon: const Icon(Icons.bookmark),
-              onPressed: () {
-                context.push('/bookmark');
+            PopupMenuButton<String>(
+              onSelected: (value) {
+                if (value == 'bookmark') {
+                  context.push('/bookmark');
+                } else if (value == 'native') {
+                  context.push('/native');
+                }
               },
+              itemBuilder: (context) => [
+                const PopupMenuItem(
+                  value: 'bookmark',
+                  child: Text('Bookmark'),
+                ),
+                const PopupMenuItem(
+                  value: 'native',
+                  child: Text('Native'),
+                ),
+              ],
             ),
           ],
         ),
