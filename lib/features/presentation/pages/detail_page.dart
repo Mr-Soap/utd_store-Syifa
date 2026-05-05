@@ -20,6 +20,14 @@ class DetailPage extends StatelessWidget {
             context.pop();
           },
         ),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.bookmark_border),
+            onPressed: () {
+              context.push('/bookmark');
+            },
+          ),
+        ],
       ),
       body: FutureBuilder(
         future: service.fetchProductDetail(productId),
@@ -45,9 +53,9 @@ class DetailPage extends StatelessWidget {
                     Text(
                       product.category,
                       style: TextStyle(
-                        fontSize: 18,
-                        color: Colors.teal.shade600,
-                        fontWeight: FontWeight.w500,
+                        fontSize: 49,
+                        color: Color(0xFF4F46E5),
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
 
@@ -84,10 +92,12 @@ class DetailPage extends StatelessWidget {
                     Text(
                       'ID Produk: ${product.id}',
                       style: TextStyle(
-                        fontSize: 13,
+                        fontSize: 16,
                         color: Colors.grey.shade600,
                       ),
                     ),
+
+                    const SizedBox(height: 10),
 
                     //nama produk
                     Text(
@@ -96,6 +106,7 @@ class DetailPage extends StatelessWidget {
                       style: const TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
+                        color: Colors.black
                       ),
                     ),
 

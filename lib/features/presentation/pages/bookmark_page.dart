@@ -36,8 +36,8 @@ class BookmarkPage extends StatelessWidget {
                 children: [
                   Icon(
                     Icons.bookmark_border,
-                    size: 90,
-                    color: Colors.blueGrey,
+                    size: 290,
+                    color: Color.fromARGB(255, 165, 163, 214),
                   ),
 
                   const SizedBox(height: 10),
@@ -48,8 +48,9 @@ class BookmarkPage extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
-                      color: Colors.blueGrey),
-                  )
+                      color: Color.fromARGB(255, 165, 163, 214),
+                    ),
+                  ),
                 ],
               ),
             );
@@ -60,25 +61,40 @@ class BookmarkPage extends StatelessWidget {
             itemBuilder: (context, index) {
               final item = data[index];
 
-              final time ="${item.savedAt.hour.toString().padLeft(2, '0')}:${item.savedAt.minute.toString().padLeft(2, '0')}";
+              final time =
+                  "${item.savedAt.hour.toString().padLeft(2, '0')}:${item.savedAt.minute.toString().padLeft(2, '0')}";
 
-              return ListTile(
-                title: Text(item.title),
-                subtitle: Text('Disimpan pada $time'),
-                trailing: IconButton(
-                  icon: const Icon(
-                    Icons.delete,
-                    color: Colors.red,
+              return Column(
+                children: [
+                  ListTile(
+                    //nama prod
+                    title: Text(item.title),
+
+                    //timestamp
+                    subtitle: Text('Disimpan pada $time'),
+
+                    //delete
+                    trailing: IconButton(
+                      icon: const Icon(Icons.delete, color: Colors.red),
+                      onPressed: () {
+                        final repo = sl<BookmarkRepo>();
+                        repo.removeBookmark(item.id);
+                      },
+                    ),
                   ),
-                  onPressed: () {
-                    final repo = sl<BookmarkRepo>();
-                    repo.removeBookmark(item.id);
-                  },
-                ),
+
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: Divider(
+                      thickness: 0.8,
+                      color: Colors.grey.withValues(alpha: 0.3),
+                    ),
+                  ),
+                ],
               );
             },
           );
-        }
+        },
       ),
     );
   }

@@ -25,67 +25,90 @@ class ProductPage extends StatelessWidget {
                 }
               },
               itemBuilder: (context) => [
-                const PopupMenuItem(
-                  value: 'bookmark',
-                  child: Text('Bookmark'),
-                ),
-                const PopupMenuItem(
-                  value: 'native',
-                  child: Text('Native'),
-                ),
+                const PopupMenuItem(value: 'bookmark', child: Text('Bookmark')),
+                const PopupMenuItem(value: 'native', child: Text('Native')),
               ],
             ),
           ],
         ),
         body: BlocBuilder<ProductCubit, ProductState>(
           builder: (context, state) {
-            return switch(state) {
-              ProductLoading() => const Center(child: CircularProgressIndicator()),
+            return switch (state) {
+              ProductLoading() => const Center(
+                child: CircularProgressIndicator(),
+              ),
               ProductLoaded(products: final listProducts) => ListView.builder(
                 itemCount: listProducts.length,
                 itemBuilder: (context, index) {
                   final product = state.products[index];
 
-                  return ListTile(
-                    //foto produk
-                    leading: Image.network(
-                      product.image,
-                      width: 50,
-                      height: 50,
-                      fit: BoxFit.cover,
-                      errorBuilder: (context, error, stackTrace) =>
-                          const Icon(Icons.error),
-                    ),
+                  return Column(
+                    children: [
+                      ListTile(
+                        //foto produk
+                        leading: Image.network(
+                          product.image,
+                          width: 50,
+                          height: 50,
+                          fit: BoxFit.cover,
+                          errorBuilder: (context, error, stackTrace) =>
+                              const Icon(Icons.error),
+                        ),
 
-                    //nama produk
-                    title: Text(product.title),
+                        //nama produk
+                        title: Text(
+                          product.title,
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
 
-                    //bookmark
-                    trailing: IconButton(
-                      icon: const Icon(Icons.bookmark_add),
-                      onPressed: () {
-                        final repo = sl<BookmarkRepo>();
-                        repo.addBookmark(product.title);
-                      },
-                    ),
+                        //bookmark
+                        trailing: IconButton(
+                          icon: Icon(
+                            Icons.bookmark_add,
+                            color: Colors.lightGreen,
+                          ),
+                          onPressed: () {
+                            final repo = sl<BookmarkRepo>();
+                            repo.addBookmark(product.title);
+                          },
+                        ),
 
-                    //id kategory dan harga
-                    subtitle: Row(
-                      children: [
-                        Text("ID: ${product.id}"),
-                        const SizedBox(width: 10),
-                        Text("Kategori: ${product.category}"),
+                        //id kategory dan harga
+                        subtitle: Row(
+                          children: [
+                            Text("ID: ${product.id}"),
+                            const SizedBox(width: 10),
+                            Text("Kategori: ${product.category}"),
 
-                        const Spacer(),
+                            const Spacer(),
 
-                        Text("\$${product.price}"),
-                        const SizedBox(width: 10),
-                      ],
-                    ),
+                            Text(
+                              "\$${product.price}",
+                              style: TextStyle(
+                                color: Colors.amber,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            const SizedBox(width: 10),
+                          ],
+                        ),
 
-                    onTap: () {
-                      context.push('/detail/${product.id}');
-                    },
+                        onTap: () {
+                          context.push('/detail/${product.id}');
+                        },
+                      ),
+
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        child: Divider(
+                          thickness: 0.8,
+                          color: Colors.grey.withValues(alpha: 0.3),
+                        ),
+                      ),
+                    ],
                   );
                 },
               ),
@@ -104,6 +127,9 @@ class ProductPage extends StatelessWidget {
           onPressed: () {
             context.push('/crypto');
           },
+          backgroundColor: const Color(0xFF667EEA),
+          foregroundColor: Colors.white,
+          elevation: 6,
           child: const Icon(Icons.currency_bitcoin),
         ),
       ),

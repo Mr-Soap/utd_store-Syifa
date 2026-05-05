@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:go_router/go_router.dart';
 import '../../../core/di/injector.dart';
-import '../../data/services/crypto_service.dart';
+import '../../domain/services/crypto_service.dart';
 import '../../../core/utility/heavy_compute.dart';
 
 class CryptoPage extends StatefulWidget {
@@ -38,7 +38,7 @@ class _CryptoPageState extends State<CryptoPage> {
             children: [
               //judul
               Text(
-                "Realtime Bitcoin Price",
+                "Harga Bitcoin Realtime",
                 style: TextStyle(
                   fontSize: 40,
                   fontWeight: FontWeight.bold,
@@ -47,7 +47,7 @@ class _CryptoPageState extends State<CryptoPage> {
               ),
 
               //gambar btc
-              Icon(Icons.currency_bitcoin, size: 490, color: Colors.amber),
+              Icon(Icons.currency_bitcoin, size: 390, color: Colors.amber),
 
               const SizedBox(height: 20),
 
@@ -69,7 +69,7 @@ class _CryptoPageState extends State<CryptoPage> {
 
                   return Text(
                     "BTC: \$${snapshot.data!.toStringAsFixed(2)}",
-                    style: const TextStyle(fontSize: 24),
+                    style: const TextStyle(fontSize: 24, color: Color.fromARGB(255, 78, 70, 0)),
                   );
                 },
               ),
@@ -106,7 +106,7 @@ class _CryptoPageState extends State<CryptoPage> {
               if (result != null)
                 Text(
                   "Hasil kalkulasi: $result",
-                  style: const TextStyle(fontSize: 16),
+                  style: const TextStyle(fontSize: 16, color: Color.fromARGB(255, 78, 70, 0)),
                 ),
             ],
           ),
