@@ -12,7 +12,15 @@ class DetailPage extends StatelessWidget {
     final service = sl<ProductService>();
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Detail Produk')),
+      appBar: AppBar(
+        title: const Text('Detail Produk'),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios_new),
+          onPressed: () {
+            context.pop();
+          },
+        ),
+      ),
       body: FutureBuilder(
         future: service.fetchProductDetail(productId),
         builder: (context, snapshot) {

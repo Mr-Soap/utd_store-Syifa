@@ -85,6 +85,14 @@ class ProductPage extends StatelessWidget {
             };
           },
         ),
+
+        floatingActionButton: FloatingActionButton(
+          tooltip: "Buka Crypto Hub",
+          onPressed: () {
+            context.push('/crypto');
+          },
+          child: const Icon(Icons.currency_bitcoin),
+        ),
       ),
     );
   }
