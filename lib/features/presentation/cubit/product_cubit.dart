@@ -1,9 +1,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../data/models/product_model.dart';
-import '../../data/models/product_repo.dart';
+import '../../data/models/repositories/product_repo.dart';
 import '../../../core/di/injector.dart';
 
-abstract class ProductState {}
+sealed class ProductState {}
 
 class ProductLoading extends ProductState{}
 
@@ -13,7 +13,11 @@ class ProductLoaded extends ProductState{
   ProductLoaded(this.products);
 }
 
-class ProductError extends ProductState{}
+class ProductError extends ProductState{
+  final String message;
+
+  ProductError(this.message);
+}
 
 class ProductCubit extends Cubit<ProductState>{
   final ProductRepo repository = sl<ProductRepo>();
@@ -29,8 +33,7 @@ class ProductCubit extends Cubit<ProductState>{
 
       emit(ProductLoaded(products));
     } catch (e) {
-      print("PRODUCT ERROR: $e");
-      emit(ProductError());
+      emit(ProductError(e.toString()));
     }
   }
 }

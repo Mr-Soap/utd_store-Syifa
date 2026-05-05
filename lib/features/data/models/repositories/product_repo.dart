@@ -1,6 +1,6 @@
-import 'product_model.dart';
-import '../services/api_service.dart';
-import '../../../core/di/injector.dart';
+import '../product_model.dart';
+import '../../services/api_service.dart';
+import '../../../../core/di/injector.dart';
 
 class ProductRepo {
   final ApiService apiService = sl<ApiService>();

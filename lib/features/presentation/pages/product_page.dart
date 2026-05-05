@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:utd_store/features/data/models/repositories/bookmark_repo.dart';
 import '../cubit/product_cubit.dart';
+import '../../../core/di/injector.dart';
 
 class ProductPage extends StatelessWidget {
   const ProductPage({super.key});
@@ -11,14 +13,23 @@ class ProductPage extends StatelessWidget {
     return BlocProvider(
       create: (_) => ProductCubit()..fetchProducts(),
       child: Scaffold(
-        appBar: AppBar(title: const Text("UTD STORE - Syifa")),
+        appBar: AppBar(
+          title: const Text("UTD STORE - Syifa"),
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.bookmark),
+              onPressed: () {
+                context.push('/bookmark');
+              },
+            ),
+          ],
+        ),
         body: BlocBuilder<ProductCubit, ProductState>(
           builder: (context, state) {
-            if (state is ProductLoading) {
-              return const Center(child: CircularProgressIndicator());
-            } else if (state is ProductLoaded) {
-              return ListView.builder(
-                itemCount: state.products.length,
+            return switch(state) {
+              ProductLoading() => const Center(child: CircularProgressIndicator()),
+              ProductLoaded(products: final listProducts) => ListView.builder(
+                itemCount: listProducts.length,
                 itemBuilder: (context, index) {
                   final product = state.products[index];
 
@@ -35,6 +46,15 @@ class ProductPage extends StatelessWidget {
 
                     //nama produk
                     title: Text(product.title),
+
+                    //bookmark
+                    trailing: IconButton(
+                      icon: const Icon(Icons.bookmark_add),
+                      onPressed: () {
+                        final repo = sl<BookmarkRepo>();
+                        repo.addBookmark(product.title);
+                      },
+                    ),
 
                     //id kategory dan harga
                     subtitle: Row(
@@ -55,10 +75,14 @@ class ProductPage extends StatelessWidget {
                     },
                   );
                 },
-              );
-            } else {
-              return const Center(child: Text("Error"));
-            }
+              ),
+              ProductError(message: final errorMsg) => Center(
+                child: Text(
+                  errorMsg,
+                  style: const TextStyle(color: Colors.red),
+                ),
+              ),
+            };
           },
         ),
       ),
