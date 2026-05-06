@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:utd_store/core/theme/app_color.dart';
 import '../../../core/di/injector.dart';
 import '../../data/models/repositories/bookmark_repo.dart';
+
 
 class BookmarkPage extends StatelessWidget {
   const BookmarkPage({super.key});
@@ -12,7 +15,14 @@ class BookmarkPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Bookmark'),
+        title: Text(
+          'Bookmark',
+          style: GoogleFonts.montserrat(
+            color: AppColor.textPrimary,
+            fontWeight: FontWeight.bold
+          ),
+          ),
+        centerTitle: true,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios_new),
           onPressed: () {
@@ -66,28 +76,48 @@ class BookmarkPage extends StatelessWidget {
 
               return Column(
                 children: [
-                  ListTile(
-                    //nama prod
-                    title: Text(item.title),
-
-                    //timestamp
-                    subtitle: Text('Disimpan pada $time'),
-
-                    //delete
-                    trailing: IconButton(
-                      icon: const Icon(Icons.delete, color: Colors.red),
-                      onPressed: () {
-                        final repo = sl<BookmarkRepo>();
-                        repo.removeBookmark(item.id);
-                      },
+                  Container(
+                    margin: const EdgeInsets.symmetric(
+                      horizontal: 12,
+                      vertical: 6,
                     ),
-                  ),
+                    padding: const EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      color: AppColor.background,
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(
+                        color: const Color.fromARGB(69, 235, 211, 248),
+                      ),
+                    ),
+                    child: ListTile(
+                      //nama prod
+                      title: Text(
+                        item.title,
+                        overflow: TextOverflow.ellipsis,
+                        style: GoogleFonts.poppins(
+                          color: AppColor.textPrimary,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14,
+                        ),
+                      ),
 
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: Divider(
-                      thickness: 0.8,
-                      color: Colors.grey.withValues(alpha: 0.3),
+                      //timestamp
+                      subtitle: Text(
+                        'Disimpan pada $time',
+                        style: GoogleFonts.inter(
+                          color: AppColor.textSecondary,
+                          fontSize: 12
+                        ),  
+                      ),
+
+                      //delete
+                      trailing: IconButton(
+                        icon: const Icon(Icons.delete, color: Colors.red),
+                        onPressed: () {
+                          final repo = sl<BookmarkRepo>();
+                          repo.removeBookmark(item.id);
+                        },
+                      ),
                     ),
                   ),
                 ],

@@ -16,7 +16,7 @@ class AppTheme {
       backgroundColor: AppColor.primary,
       foregroundColor: Colors.white,
       elevation: 0,
-      centerTitle: true,
+      centerTitle: false,
     ),
 
     textTheme: const TextTheme(
@@ -42,7 +42,7 @@ class AppTheme {
     ),
 
     progressIndicatorTheme: const ProgressIndicatorThemeData(
-      color: AppColor.primary,
+      color: AppColor.loading,
     ),
   );
 }

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:utd_store/core/theme/app_color.dart';
 import '../../../core/di/injector.dart';
 import '../../domain/services/native_service.dart';
 
@@ -20,7 +22,14 @@ class _NativePageState extends State<NativePage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Native Integration"),
+        centerTitle: true,
+        title: Text(
+          "Native Integration",
+          style: GoogleFonts.montserrat(
+            color: AppColor.textPrimary,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
         leading: IconButton(
           onPressed: () {
             context.pop();
@@ -37,9 +46,9 @@ class _NativePageState extends State<NativePage> {
               //info batre
               Text(
                 "Status Baterai",
-                style: TextStyle(
-                  fontSize: 24,
-                  color: Color(0xFF4F46E5),
+                style: GoogleFonts.poppins(
+                  fontSize: 39,
+                  color: AppColor.textPrimary,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -55,13 +64,37 @@ class _NativePageState extends State<NativePage> {
 
               Text(
                 "Battery: $batteryLevel%",
-                style: const TextStyle(fontSize: 25, color: Color.fromARGB(255, 39, 214, 45)),
+                style: GoogleFonts.inter(
+                  fontSize: 25,
+                  color: Color.fromARGB(255, 39, 214, 45),
+                  shadows: [
+                    Shadow(
+                      blurRadius: 15,
+                      color: Color.fromARGB(255, 39, 214, 45),
+                      offset: Offset(0, 0),
+                    ),
+                    Shadow(
+                      blurRadius: 25,
+                      color: Color.fromARGB(255, 20, 112, 23),
+                      offset: Offset(0, 0),
+                    ),
+                  ],
+                ),
               ),
 
               const SizedBox(height: 20),
 
               //button batre
               ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AppColor.textSecondary,
+                  foregroundColor: const Color(0xFF1A0061),
+                  minimumSize: const Size(450, 50),
+                  elevation: 0, //
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
                 onPressed: () async {
                   setState(() {
                     isLoading = true;
@@ -76,15 +109,38 @@ class _NativePageState extends State<NativePage> {
                     });
                   }
                 },
-                child: const Text('Cek Baterai'),
+                child: Text(
+                  'Cek Baterai',
+                  style: GoogleFonts.inter(
+                    color: AppColor.background,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
               ),
+
+              const SizedBox(height: 10),
 
               //showtoast
               ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AppColor.textSecondary,
+                  foregroundColor: const Color(0xFF1A0061),
+                  minimumSize: const Size(450, 50),
+                  elevation: 0, //
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
                 onPressed: () async {
                   await native.showNativeToast("Hello dari developer");
                 },
-                child: const Text('Tampilkan Toast'),
+                child: Text(
+                  'Tampilkan Toast',
+                  style: GoogleFonts.inter(
+                    color: AppColor.background,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
               ),
             ],
           ),

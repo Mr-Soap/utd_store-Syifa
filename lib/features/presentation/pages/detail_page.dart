@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:utd_store/core/theme/app_color.dart';
 import '../../../core/di/injector.dart';
 import '../../data/services/product_service.dart';
 
@@ -13,7 +15,14 @@ class DetailPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Detail Produk'),
+        centerTitle: true,
+        title: Text(
+          'Detail Produk',
+          style: GoogleFonts.montserrat(
+            color: AppColor.textPrimary,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios_new),
           onPressed: () {
@@ -51,10 +60,10 @@ class DetailPage extends StatelessWidget {
                   children: [
                     //kategori
                     Text(
-                      product.category,
-                      style: TextStyle(
-                        fontSize: 49,
-                        color: Color(0xFF4F46E5),
+                      product.category.toUpperCase(),
+                      style: GoogleFonts.poppins(
+                        fontSize: 40,
+                        color: AppColor.textPrimary,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -75,13 +84,25 @@ class DetailPage extends StatelessWidget {
                       ),
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(16),
-                        child: Image.network(
-                          product.image,
-                          width: 300,
-                          height: 300,
-                          fit: BoxFit.cover,
-                          errorBuilder: (context, error, stackTrace) =>
-                              const Icon(Icons.error, size: 80),
+                        child: Container(
+                          padding: EdgeInsets.symmetric(horizontal: 12),
+                          decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                              colors: [
+                                AppColor.secondary.withValues(alpha: 0.1),
+                                Colors.transparent,
+                                AppColor.secondary.withValues(alpha: 0.1),
+                              ],
+                            ),
+                          ),
+                          child: Image.network(
+                            product.image,
+                            width: 500,
+                            height: 500,
+                            fit: BoxFit.contain, // 🔥 biar gak kepotong
+                            errorBuilder: (context, error, stackTrace) =>
+                                const Icon(Icons.error, size: 80),
+                          ),
                         ),
                       ),
                     ),
@@ -91,9 +112,9 @@ class DetailPage extends StatelessWidget {
                     //id
                     Text(
                       'ID Produk: ${product.id}',
-                      style: TextStyle(
+                      style: GoogleFonts.inter(
                         fontSize: 16,
-                        color: Colors.grey.shade600,
+                        color: AppColor.textSecondary,
                       ),
                     ),
 
@@ -103,12 +124,14 @@ class DetailPage extends StatelessWidget {
                     Text(
                       product.title,
                       textAlign: TextAlign.center,
-                      style: const TextStyle(
+                      style: GoogleFonts.inter(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
-                        color: Colors.black
+                        color: AppColor.textSecondary,
                       ),
                     ),
+
+                    const SizedBox(height: 20),
 
                     //harga
                     Container(
@@ -117,7 +140,7 @@ class DetailPage extends StatelessWidget {
                         vertical: 10,
                       ),
                       decoration: BoxDecoration(
-                        color: Colors.teal.shade50,
+                        color: const Color.fromARGB(255, 242, 241, 224),
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: Text(
@@ -125,7 +148,7 @@ class DetailPage extends StatelessWidget {
                         style: const TextStyle(
                           fontSize: 22,
                           fontWeight: FontWeight.bold,
-                          color: Colors.teal,
+                          color: Color.fromARGB(255, 218, 163, 0),
                         ),
                       ),
                     ),

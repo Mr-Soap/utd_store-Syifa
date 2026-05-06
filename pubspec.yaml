@@ -46,6 +46,8 @@ dependencies:
   build_runner: ^2.4.13
   isar_generator: ^3.1.0+1
   web_socket_channel: ^3.0.3
+  google_fonts: ^8.1.0
+  fl_chart: ^1.2.0
 
 dev_dependencies:
   flutter_test:

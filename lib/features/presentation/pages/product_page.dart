@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:utd_store/core/theme/app_color.dart';
 import 'package:utd_store/features/data/models/repositories/bookmark_repo.dart';
 import '../cubit/product_cubit.dart';
 import '../../../core/di/injector.dart';
@@ -14,9 +16,34 @@ class ProductPage extends StatelessWidget {
       create: (_) => ProductCubit()..fetchProducts(),
       child: Scaffold(
         appBar: AppBar(
-          title: const Text("UTD STORE - Syifa"),
+          centerTitle: false,
+          title: Text.rich(
+            TextSpan(
+              children: [
+                TextSpan(
+                  text: 'UTD STORE - ',
+                  style: GoogleFonts.montserrat(
+                    color: AppColor.textPrimary,
+                    fontWeight: FontWeight.bold,
+                  )
+                ),
+                TextSpan(
+                  text: 'SYIFA',
+                  style: GoogleFonts.montserrat(
+                    color: AppColor.secondary,
+                    fontWeight: FontWeight.bold
+                  )
+                ),
+              ]
+            ),
+          ),
           actions: [
             PopupMenuButton<String>(
+              color: AppColor.background,
+              elevation: 8,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
               onSelected: (value) {
                 if (value == 'bookmark') {
                   context.push('/bookmark');
@@ -25,8 +52,32 @@ class ProductPage extends StatelessWidget {
                 }
               },
               itemBuilder: (context) => [
-                const PopupMenuItem(value: 'bookmark', child: Text('Bookmark')),
-                const PopupMenuItem(value: 'native', child: Text('Native')),
+                PopupMenuItem(
+                  value: 'bookmark',
+                  child: Row(
+                    children: [
+                      Icon(Icons.bookmark),
+                      SizedBox(width: 10),
+                      Text(
+                        'Bookmark',
+                        style: GoogleFonts.inter(color: AppColor.textPrimary),
+                      ),
+                    ],
+                  ),
+                ),
+                PopupMenuItem(
+                  value: 'native',
+                  child: Row(
+                    children: [
+                      Icon(Icons.phone_android),
+                      SizedBox(width: 10),
+                      Text(
+                        'Native',
+                        style: GoogleFonts.inter(color: AppColor.textPrimary),
+                      ),
+                    ],
+                  ),
+                ),
               ],
             ),
           ],
@@ -44,68 +95,88 @@ class ProductPage extends StatelessWidget {
 
                   return Column(
                     children: [
-                      ListTile(
-                        //foto produk
-                        leading: Image.network(
-                          product.image,
-                          width: 50,
-                          height: 50,
-                          fit: BoxFit.cover,
-                          errorBuilder: (context, error, stackTrace) =>
-                              const Icon(Icons.error),
+                      Container(
+                        margin: const EdgeInsets.symmetric(
+                          horizontal: 12,
+                          vertical: 6,
                         ),
-
-                        //nama produk
-                        title: Text(
-                          product.title,
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
+                        padding: const EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                          color: AppColor.background,
+                          borderRadius: BorderRadius.circular(12),
+                          border: Border.all(
+                            color: const Color.fromARGB(69, 235, 211, 248),
                           ),
                         ),
+                        child: ListTile(
 
-                        //bookmark
-                        trailing: IconButton(
-                          icon: Icon(
-                            Icons.bookmark_add,
-                            color: Colors.lightGreen,
+                          //foto produk
+                          leading: Image.network(
+                            product.image,
+                            width: 50,
+                            height: 50,
+                            fit: BoxFit.cover,
+                            errorBuilder: (context, error, stackTrace) =>
+                                const Icon(Icons.error),
                           ),
-                          onPressed: () {
-                            final repo = sl<BookmarkRepo>();
-                            repo.addBookmark(product.title);
-                          },
-                        ),
 
-                        //id kategory dan harga
-                        subtitle: Row(
-                          children: [
-                            Text("ID: ${product.id}"),
-                            const SizedBox(width: 10),
-                            Text("Kategori: ${product.category}"),
-
-                            const Spacer(),
-
-                            Text(
-                              "\$${product.price}",
-                              style: TextStyle(
-                                color: Colors.amber,
-                                fontWeight: FontWeight.bold,
-                              ),
+                          //nama produk
+                          title: Text(
+                            product.title,
+                            overflow: TextOverflow.ellipsis,
+                            style: GoogleFonts.poppins(
+                              color: AppColor.textPrimary,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 14,
                             ),
-                            const SizedBox(width: 10),
-                          ],
-                        ),
+                          ),
 
-                        onTap: () {
-                          context.push('/detail/${product.id}');
-                        },
-                      ),
+                          //bookmark
+                          trailing: IconButton(
+                            icon: Icon(
+                              Icons.bookmark_add,
+                              color: Colors.lightGreen,
+                            ),
+                            onPressed: () {
+                              final repo = sl<BookmarkRepo>();
+                              repo.addBookmark(product.title);
+                            },
+                          ),
 
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 16),
-                        child: Divider(
-                          thickness: 0.8,
-                          color: Colors.grey.withValues(alpha: 0.3),
+                          //id kategory dan harga
+                          subtitle: Row(
+                            children: [
+                              Expanded(
+                                child: Text(
+                                  "ID: ${product.id} • Kategori: ${product.category}",
+                                  style: GoogleFonts.inter(
+                                    color: AppColor.textSecondary,
+                                    fontSize: 12,
+                                  ),
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ),
+
+                              const SizedBox(width: 10),
+
+                              Text(
+                                "\$${product.price}",
+                                style: GoogleFonts.inter(
+                                  color: Colors.amber,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 12,
+                                ),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                              const SizedBox(width: 10),
+                            ],
+                          ),
+
+                          onTap: () {
+                            context.push('/detail/${product.id}');
+                          },
                         ),
                       ),
                     ],
@@ -127,8 +198,8 @@ class ProductPage extends StatelessWidget {
           onPressed: () {
             context.push('/crypto');
           },
-          backgroundColor: const Color(0xFF667EEA),
-          foregroundColor: Colors.white,
+          backgroundColor: AppColor.secondary,
+          foregroundColor: AppColor.background,
           elevation: 6,
           child: const Icon(Icons.currency_bitcoin),
         ),
