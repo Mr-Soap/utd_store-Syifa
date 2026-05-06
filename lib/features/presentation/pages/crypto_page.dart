@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/foundation.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:utd_store/core/theme/app_color.dart';
 import '../../../core/di/injector.dart';
 import '../../domain/services/crypto_service.dart';
-import '../../../core/utility/heavy_compute.dart';
 
 class CryptoPage extends StatefulWidget {
   const CryptoPage({super.key});
@@ -18,8 +16,9 @@ class _CryptoPageState extends State<CryptoPage> {
   int? result;
   bool isLoading = false;
   List<double> priceHistory = [];
-  double? lastPrice; // harga sebelumnya
+  double? lastPrice;
   double? changePercent;
+  final isolateService = CryptoService();
 
   @override
   Widget build(BuildContext context) {
@@ -200,15 +199,14 @@ class _CryptoPageState extends State<CryptoPage> {
                           borderRadius: BorderRadius.circular(10),
                         ),
                       ),
+                      
                       onPressed: () async {
                         setState(() {
                           isLoading = true;
                         });
                 
                         const int lastNimDigit = 49;
-                        final int loop = lastNimDigit * 10000000;
-                
-                        final res = await compute(heavyTask, loop);
+                        final res = await isolateService.calculateHeavyTask(lastNimDigit);
                 
                         setState(() {
                           result = res;

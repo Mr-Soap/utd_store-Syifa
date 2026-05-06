@@ -18,7 +18,7 @@ class ApiService {
             return handler.next(options);
           },
           onResponse: (response, handler) {
-            logger.d("Request: ${response.data}");
+            logger.d("Response: ${response.data}");
             return handler.next(response);
           },
           onError: (error, handler) {
