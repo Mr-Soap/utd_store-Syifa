@@ -59,23 +59,23 @@ class _NativePageState extends State<NativePage> {
               Icon(
                 Icons.battery_unknown,
                 size: 390,
-                color: const Color.fromARGB(255, 39, 214, 45),
+                color: const Color(0xFF27D62D),
               ),
 
               Text(
                 "Battery: $batteryLevel%",
                 style: GoogleFonts.inter(
                   fontSize: 25,
-                  color: Color.fromARGB(255, 39, 214, 45),
+                  color: Color(0xFF27D62D),
                   shadows: [
                     Shadow(
                       blurRadius: 15,
-                      color: Color.fromARGB(255, 39, 214, 45),
+                      color: Color(0xFF27D62D),
                       offset: Offset(0, 0),
                     ),
                     Shadow(
                       blurRadius: 25,
-                      color: Color.fromARGB(255, 20, 112, 23),
+                      color: Color(0xFF147017),
                       offset: Offset(0, 0),
                     ),
                   ],

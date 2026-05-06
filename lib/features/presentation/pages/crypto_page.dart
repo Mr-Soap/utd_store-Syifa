@@ -130,12 +130,12 @@ class _CryptoPageState extends State<CryptoPage> {
                           shadows: [
                             Shadow(
                               blurRadius: 15,
-                              color: const Color.fromARGB(255, 250, 222, 109),
+                              color: const Color(0xFFFADE6D),
                               offset: Offset(0, 0),
                             ),
                             Shadow(
                               blurRadius: 25,
-                              color: const Color.fromARGB(255, 143, 117, 16),
+                              color: const Color(0xFF8F7510),
                               offset: Offset(0, 0),
                             ),
                           ],
@@ -183,7 +183,7 @@ class _CryptoPageState extends State<CryptoPage> {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(12),
                   border: Border.all(
-                    color: const Color.fromARGB(90, 235, 211, 248),
+                    color: const Color(0x5AEBD3F8),
                     width: 1,
                   )
                 ),

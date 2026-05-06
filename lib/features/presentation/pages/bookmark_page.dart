@@ -47,7 +47,7 @@ class BookmarkPage extends StatelessWidget {
                   Icon(
                     Icons.bookmark_border,
                     size: 290,
-                    color: Color.fromARGB(255, 165, 163, 214),
+                    color:Color(0xFFA5A3D6),
                   ),
 
                   const SizedBox(height: 10),
@@ -58,7 +58,7 @@ class BookmarkPage extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
-                      color: Color.fromARGB(255, 165, 163, 214),
+                      color: Color(0xFFA5A3D6),
                     ),
                   ),
                 ],
@@ -86,7 +86,7 @@ class BookmarkPage extends StatelessWidget {
                       color: AppColor.background,
                       borderRadius: BorderRadius.circular(12),
                       border: Border.all(
-                        color: const Color.fromARGB(69, 235, 211, 248),
+                        color: const Color(0x45EBD3F8),
                       ),
                     ),
                     child: ListTile(

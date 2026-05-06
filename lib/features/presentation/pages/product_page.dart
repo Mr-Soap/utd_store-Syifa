@@ -105,7 +105,7 @@ class ProductPage extends StatelessWidget {
                           color: AppColor.background,
                           borderRadius: BorderRadius.circular(12),
                           border: Border.all(
-                            color: const Color.fromARGB(69, 235, 211, 248),
+                            color: const Color(0x45EBD3F8),
                           ),
                         ),
                         child: ListTile(

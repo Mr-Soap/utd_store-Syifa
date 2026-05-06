@@ -99,7 +99,7 @@ class DetailPage extends StatelessWidget {
                             product.image,
                             width: 500,
                             height: 500,
-                            fit: BoxFit.contain, // 🔥 biar gak kepotong
+                            fit: BoxFit.contain,
                             errorBuilder: (context, error, stackTrace) =>
                                 const Icon(Icons.error, size: 80),
                           ),
@@ -140,7 +140,7 @@ class DetailPage extends StatelessWidget {
                         vertical: 10,
                       ),
                       decoration: BoxDecoration(
-                        color: const Color.fromARGB(255, 242, 241, 224),
+                        color: const Color(0xFFF2F1E0),
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: Text(
@@ -148,7 +148,7 @@ class DetailPage extends StatelessWidget {
                         style: const TextStyle(
                           fontSize: 22,
                           fontWeight: FontWeight.bold,
-                          color: Color.fromARGB(255, 218, 163, 0),
+                          color: Color(0xFFDAA300),
                         ),
                       ),
                     ),
